@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --color-neon: #00FF7F;
+  --color-neon-dark: #0A4F2C;
+  --color-neon-lime: #39FF14;
+  --color-dark: #050505;
+  --color-dark-card: #0C0C0C;
+  --color-dark-lighter: #161616;
+  --color-border: #1A1A1A;
+  --color-text: #E0E0E0;
+  --color-text-muted: #888888;
+  --color-text-dim: #555555;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-dark);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Dot grid background */
+.bg-grid {
+  background-image: radial-gradient(circle, rgba(0,255,127,0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Scan lines overlay */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,255,127,0.015) 2px,
+    rgba(0,255,127,0.015) 4px
+  );
+  z-index: 9999;
+}
+
+/* Glow effects */
+.glow-text {
+  text-shadow: 0 0 20px rgba(0,255,127,0.4), 0 0 40px rgba(0,255,127,0.15);
+}
+.glow-box {
+  box-shadow: 0 0 15px rgba(0,255,127,0.15), 0 0 30px rgba(0,255,127,0.05);
+}
+.glow-box-hover:hover {
+  box-shadow: 0 0 20px rgba(0,255,127,0.3), 0 0 40px rgba(0,255,127,0.1);
+}
+
+/* Scroll-reveal animation */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  animation: reveal-up 0.8s ease both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 30%;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+@keyframes typewriter-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.animate-caret { animation: typewriter-blink 0.8s step-end infinite; }
+
+@keyframes pulse-neon {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+.animate-pulse-neon { animation: pulse-neon 2s ease-in-out infinite; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-thumb { background: #1A1A1A; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00FF7F33; }
