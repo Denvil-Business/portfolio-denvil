@@ -3,25 +3,25 @@ const PROJECTS = [
     title: 'Le Comptoir Doré',
     desc: 'Landing page premium pour un restaurant gastronomique parisien',
     tags: ['React', 'Tailwind CSS', 'Responsive'],
-    url: 'https://portfolio-demo-1-one.vercel.app',
+    url: 'https://lecomptoirdore.vercel.app',
   },
   {
     title: 'NovaTech Dashboard',
     desc: 'Dashboard analytics complet pour une boutique e-commerce',
     tags: ['React', 'Recharts', 'Tailwind CSS'],
-    url: 'https://portfolio-demo-2-eta.vercel.app',
+    url: 'https://novatech-dash.vercel.app',
   },
   {
     title: 'Sérénity Chatbot',
     desc: "Chatbot IA intégré pour un site d'assurance",
     tags: ['React', 'IA', 'Chatbot'],
-    url: 'https://portfolio-demo-3.vercel.app',
+    url: 'https://serenity-assurance.vercel.app',
   },
   {
     title: 'PostGenius',
     desc: "Générateur de posts LinkedIn alimenté par l'IA",
     tags: ['React', 'IA', 'Génération de contenu'],
-    url: 'https://portfolio-demo-4.vercel.app',
+    url: 'https://postgenius-app.vercel.app/',
   },
 ]
 
