@@ -1,3 +1,4 @@
+import { LanguageProvider } from './i18n'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Services from './components/Services'
@@ -8,14 +9,16 @@ import Footer from './components/Footer'
 
 export default function App() {
   return (
-    <div className="scanlines">
-      <Navbar />
+    <LanguageProvider>
+      <div className="scanlines">
+        <Navbar />
       <Hero />
       <Services />
       <Portfolio />
       <WhyMe />
       <Contact />
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </LanguageProvider>
   )
 }

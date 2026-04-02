@@ -1,28 +1,10 @@
-const PROJECTS = [
-  {
-    title: 'Le Comptoir Doré',
-    desc: 'Landing page premium pour un restaurant gastronomique parisien',
-    tags: ['React', 'Tailwind CSS', 'Responsive'],
-    url: 'https://lecomptoirdore.vercel.app',
-  },
-  {
-    title: 'NovaTech Dashboard',
-    desc: 'Dashboard analytics complet pour une boutique e-commerce',
-    tags: ['React', 'Recharts', 'Tailwind CSS'],
-    url: 'https://novatech-dash.vercel.app',
-  },
-  {
-    title: 'Sérénity Chatbot',
-    desc: "Chatbot IA intégré pour un site d'assurance",
-    tags: ['React', 'IA', 'Chatbot'],
-    url: 'https://serenity-assurance.vercel.app',
-  },
-  {
-    title: 'PostGenius',
-    desc: "Générateur de posts LinkedIn alimenté par l'IA",
-    tags: ['React', 'IA', 'Génération de contenu'],
-    url: 'https://postgenius-app.vercel.app/',
-  },
+import { useLanguage } from '../i18n'
+
+const PROJECT_URLS = [
+  'https://lecomptoirdore.vercel.app',
+  'https://novatech-dash.vercel.app',
+  'https://serenity-assurance.vercel.app',
+  'https://postgenius-app.vercel.app/',
 ]
 
 /* ── CSS Mini-Screenshots ── */
@@ -203,19 +185,22 @@ function PreviewPostGenius() {
 const PREVIEWS = [PreviewComptoir, PreviewDashboard, PreviewChatbot, PreviewPostGenius]
 
 export default function Portfolio() {
+  const { t } = useLanguage()
+  const projects = t('portfolio.projects').map((p, i) => ({ ...p, url: PROJECT_URLS[i] }))
+
   return (
     <section id="portfolio" className="py-24 px-6 bg-dark-card/50">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 reveal">
-          <span className="text-neon text-xs font-semibold tracking-widest uppercase">Réalisations</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mt-3 glow-text">Mes projets</h2>
+          <span className="text-neon text-xs font-semibold tracking-widest uppercase">{t('portfolio.label')}</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mt-3 glow-text">{t('portfolio.title')}</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {PROJECTS.map((p, i) => {
+          {projects.map((p, i) => {
             const Preview = PREVIEWS[i]
             return (
-              <div key={p.title} className="reveal group bg-dark-card border border-border rounded-2xl overflow-hidden hover:border-neon/40 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] glow-box-hover">
+              <div key={i} className="reveal group bg-dark-card border border-border rounded-2xl overflow-hidden hover:border-neon/40 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] glow-box-hover">
                 {/* Mini screenshot */}
                 <div className="h-48 relative overflow-hidden border-b border-border">
                   <Preview />
@@ -238,7 +223,7 @@ export default function Portfolio() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-sm font-medium text-neon border border-neon/30 px-4 py-2 rounded-lg hover:bg-neon hover:text-dark transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,255,127,0.25)]"
                   >
-                    Voir le projet
+                    {t('portfolio.cta')}
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
                   </a>
                 </div>

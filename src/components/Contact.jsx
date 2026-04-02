@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { useLanguage } from '../i18n'
 
 export default function Contact() {
+  const { t } = useLanguage()
   const [sent, setSent] = useState(false)
 
   function handleSubmit(e) {
@@ -13,9 +15,9 @@ export default function Contact() {
     <section id="contact" className="py-24 px-6 bg-dark-card/50">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 reveal">
-          <span className="text-neon text-xs font-semibold tracking-widest uppercase">Contact</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mt-3 glow-text">Un projet en tête ?</h2>
-          <p className="text-text-muted text-sm mt-3">Discutons-en. Réponse garantie sous 24h.</p>
+          <span className="text-neon text-xs font-semibold tracking-widest uppercase">{t('contact.label')}</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mt-3 glow-text">{t('contact.title')}</h2>
+          <p className="text-text-muted text-sm mt-3">{t('contact.subtitle')}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 reveal">
@@ -23,16 +25,16 @@ export default function Contact() {
           <form onSubmit={handleSubmit} className="lg:col-span-3 space-y-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-sm font-medium text-text-muted mb-2">Nom</label>
+                <label className="block text-sm font-medium text-text-muted mb-2">{t('contact.nameLabel')}</label>
                 <input
                   type="text"
                   required
-                  placeholder="Votre nom"
+                  placeholder={t('contact.namePlaceholder')}
                   className="w-full bg-dark border border-border rounded-xl px-4 py-3.5 text-sm text-text placeholder-text-dim outline-none focus:border-neon/50 focus:ring-2 focus:ring-neon/10 transition-all"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-text-muted mb-2">Email</label>
+                <label className="block text-sm font-medium text-text-muted mb-2">{t('contact.emailLabel')}</label>
                 <input
                   type="email"
                   required
@@ -42,11 +44,11 @@ export default function Contact() {
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-text-muted mb-2">Message</label>
+              <label className="block text-sm font-medium text-text-muted mb-2">{t('contact.messageLabel')}</label>
               <textarea
                 required
                 rows="5"
-                placeholder="Décrivez votre projet..."
+                placeholder={t('contact.messagePlaceholder')}
                 className="w-full bg-dark border border-border rounded-xl px-4 py-3.5 text-sm text-text placeholder-text-dim outline-none focus:border-neon/50 focus:ring-2 focus:ring-neon/10 transition-all resize-none"
               />
             </div>
@@ -58,7 +60,7 @@ export default function Contact() {
                   : 'border border-neon text-neon hover:bg-neon hover:text-dark hover:shadow-[0_0_20px_rgba(0,255,127,0.3)]'
               }`}
             >
-              {sent ? 'Message envoyé !' : 'Envoyer'}
+              {sent ? t('contact.sent') : t('contact.send')}
             </button>
           </form>
 
@@ -72,7 +74,7 @@ export default function Contact() {
             </div>
 
             <div>
-              <h3 className="text-white font-semibold text-sm mb-3">Retrouvez-moi</h3>
+              <h3 className="text-white font-semibold text-sm mb-3">{t('contact.findMe')}</h3>
               <div className="flex gap-4">
                 {/* GitHub */}
                 <a href="#" className="w-10 h-10 bg-dark border border-border rounded-lg flex items-center justify-center text-text-muted hover:text-neon hover:border-neon/40 transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,255,127,0.15)]">

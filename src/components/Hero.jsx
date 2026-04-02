@@ -1,14 +1,23 @@
 import { useState, useEffect, useRef } from 'react'
-
-const ROLES = ['Développeur Web', 'Intégrateur IA', "Créateur d'outils sur mesure"]
+import { useLanguage } from '../i18n'
 
 export default function Hero() {
+  const { t } = useLanguage()
   const [text, setText] = useState('')
   const [roleIndex, setRoleIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
   const timeoutRef = useRef(null)
 
   useEffect(() => {
+    // Reset typewriter when language (t) changes
+    clearTimeout(timeoutRef.current)
+    setText('')
+    setRoleIndex(0)
+    setIsDeleting(false)
+  }, [t])
+
+  useEffect(() => {
+    const ROLES = t('hero.roles')
     const current = ROLES[roleIndex]
 
     if (!isDeleting && text === current) {
@@ -24,7 +33,7 @@ export default function Hero() {
     }
 
     return () => clearTimeout(timeoutRef.current)
-  }, [text, isDeleting, roleIndex])
+  }, [text, isDeleting, roleIndex, t])
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-grid">
@@ -46,8 +55,7 @@ export default function Hero() {
         </div>
 
         <p className="text-text-muted text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-10">
-          Je conçois des sites web modernes et des outils alimentés par l&apos;intelligence artificielle.
-          Livraison rapide, design premium, résultats concrets.
+          {t('hero.desc')}
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -55,13 +63,13 @@ export default function Hero() {
             href="#portfolio"
             className="px-8 py-3.5 border border-neon text-neon font-semibold rounded-lg transition-all duration-300 hover:bg-neon hover:text-dark hover:shadow-[0_0_30px_rgba(0,255,127,0.3)]"
           >
-            Voir mes projets
+            {t('hero.cta1')}
           </a>
           <a
             href="#contact"
             className="px-8 py-3.5 border border-border text-text-muted hover:border-neon/40 hover:text-neon font-semibold rounded-lg transition-all duration-300"
           >
-            Me contacter
+            {t('hero.cta2')}
           </a>
         </div>
       </div>

@@ -1,14 +1,37 @@
 import { useState, useEffect } from 'react'
+import { useLanguage } from '../i18n'
 
-const NAV_LINKS = [
-  { label: 'Services', href: '#services' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Contact', href: '#contact' },
-]
+function LangSwitcher() {
+  const { lang, setLang } = useLanguage()
+  return (
+    <div className="flex items-center gap-1 text-xs font-semibold tracking-wide">
+      <button
+        onClick={() => setLang('fr')}
+        className={`transition-colors duration-200 ${lang === 'fr' ? 'text-neon' : 'text-text-muted hover:text-neon'}`}
+      >
+        FR
+      </button>
+      <span className="text-border">|</span>
+      <button
+        onClick={() => setLang('en')}
+        className={`transition-colors duration-200 ${lang === 'en' ? 'text-neon' : 'text-text-muted hover:text-neon'}`}
+      >
+        EN
+      </button>
+    </div>
+  )
+}
 
 export default function Navbar() {
+  const { t } = useLanguage()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+
+  const NAV_LINKS = [
+    { label: t('nav.services'), href: '#services' },
+    { label: t('nav.portfolio'), href: '#portfolio' },
+    { label: t('nav.contact'), href: '#contact' },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -31,8 +54,9 @@ export default function Navbar() {
             </a>
           ))}
           <a href="#contact" className="text-sm font-medium border border-neon/50 text-neon px-5 py-2.5 rounded-lg hover:bg-neon hover:text-dark transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,127,0.3)]">
-            Me contacter
+            {t('nav.cta')}
           </a>
+          <LangSwitcher />
         </div>
 
         {/* Mobile hamburger */}
@@ -56,8 +80,11 @@ export default function Navbar() {
             </a>
           ))}
           <a href="#contact" onClick={() => setOpen(false)} className="block text-sm font-medium border border-neon/50 text-neon px-5 py-2.5 rounded-lg text-center hover:bg-neon hover:text-dark transition-all">
-            Me contacter
+            {t('nav.cta')}
           </a>
+          <div className="pt-2">
+            <LangSwitcher />
+          </div>
         </div>
       )}
     </nav>
